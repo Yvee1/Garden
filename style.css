@@ -1,0 +1,17 @@
+header h1 {
+	font-family: 'Great Vibes', cursive;
+	font-weight: normal;
+	font-size: 70px;
+	text-align: center;
+	color: #002b36;
+}
+
+html {
+	background-color: #fdf6e3;
+}
+
+#sketch-holder {
+	width: 500px;
+	height: 500px;
+	margin: auto;
+}
