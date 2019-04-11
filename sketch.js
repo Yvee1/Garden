@@ -2,7 +2,12 @@ let alpha, beta;
 let baseSize;
 
 function setup() {
-  baseSize=0.06*windowWidth;
+  if (windowWidth<640){
+    baseSize=0.09*windowWidth;
+  }
+  else{
+    baseSize=0.06*windowWidth;
+  }
   canvas = createCanvas(10*baseSize, 5*baseSize);
   // Move the canvas so it’s inside our <div id="sketch-holder">.
   canvas.parent('sketch-holder');

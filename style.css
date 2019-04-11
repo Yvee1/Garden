@@ -19,11 +19,20 @@ main {
 	height: 625px;*/
 
 }
+
+.sketch {
+	width: 90%;
+	margin: 0 auto;
+}
+
+#alpha {
+	margin:auto !important;
+	display: block;
+}
+
+@media only screen and (min-width : 640px ){
 .sketch {
 	width: 60%;
 	margin: 0 auto;
 }
-#alpha {
-	margin:auto !important;
-	display: block;
 }
