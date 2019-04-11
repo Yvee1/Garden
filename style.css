@@ -10,8 +10,20 @@ html {
 	background-color: #fdf6e3;
 }
 
+main {
+	width: 100%;
+}
+
 #sketch-holder {
-	width: 700px;
-	height: 600px;
-	margin: auto;
+	/*width: 60%;
+	height: 625px;*/
+
+}
+.sketch {
+	width: 60%;
+	margin: 0 auto;
+}
+#alpha {
+	margin:auto !important;
+	display: block;
 }
