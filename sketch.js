@@ -50,6 +50,7 @@ class Block {
   }
 
   show() {
+    noStroke();
     fill(133, 100+this.layer*15, 0);
     beginShape(CLOSE);
     vertex(this.bl.x, this.bl.y);
