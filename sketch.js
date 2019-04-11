@@ -16,6 +16,19 @@ function setup() {
   slider.input(draw_);
 }
 
+function windowResized() {
+  if (windowWidth<640){
+    baseSize=0.09*windowWidth;
+  }
+  else{
+    baseSize=0.06*windowWidth;
+  }
+  resizeCanvas(10*baseSize, 5*baseSize);
+  // Move the canvas so it’s inside our <div id="sketch-holder">.
+  canvas.parent('sketch-holder');
+  draw_();
+}
+
 function draw_() {
   alpha = slider.value()
   beta = PI / 2 - alpha;
