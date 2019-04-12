@@ -1,7 +1,7 @@
 # Garden
 A to be collection of trees.
 List of possible interesting trees to plant:
-* Visualization trees
+* Data visualization trees
   * ~~Traditional Pythagoras tree~~
   * Generalized Pythagoras tree
 * Data structures
@@ -16,10 +16,13 @@ List of possible interesting trees to plant:
     * Quad-tree
   * Heap
   * Trie
-
 * Minimum spanning trees
   * Prim's algorithm
   * Kruskal's algorithm
+* Digital trees
+ * Fractal tree
+ * Space colonization tree
+ * L-system tree
   
 ## Traditional Pythagoras tree
 ![Tree](./pytree.svg)
