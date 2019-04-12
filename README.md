@@ -20,9 +20,9 @@ List of possible interesting trees to plant:
   * Prim's algorithm
   * Kruskal's algorithm
 * Digital trees
- * Fractal tree
- * Space colonization tree
- * L-system tree
+  * Fractal tree
+  * Space colonization tree
+  * L-system tree
   
 ## Traditional Pythagoras tree
 ![Tree](./pytree.svg)
