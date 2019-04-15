@@ -1,9 +1,9 @@
 let alpha, beta;
-let baseSize;
+let baseSize; 		// Size of the root square
 
 function setup() {
   if (windowWidth<640){
-    baseSize=0.09*windowWidth;
+    baseSize=0.09*windowWidth;  // Big canvas if small screen
   }
   else{
     baseSize=0.06*windowWidth;
@@ -17,6 +17,7 @@ function setup() {
 }
 
 function windowResized() {
+  // Resize canvas if window is resized
   if (windowWidth<640){
     baseSize=0.09*windowWidth;
   }
@@ -33,14 +34,15 @@ function draw_() {
   alpha = slider.value()
   beta = PI / 2 - alpha;
   background(color('#fdf6e3'));
+
   push();
   translate(width / 2, height);
   scale(1, -1)
-
-  rectMode(CORNERS);
+  rectMode(CORNERS);  // Enables drawing in Cartesian coordinates
 
   fill(color('#859900'));
   let c = baseSize;
+  // Create corners of base square: btlt = bottomleft etc.
   btlt = createVector(-c / 2, 0);
   btrt = createVector(c / 2, 0);
   tplt = createVector(-c / 2, c);
@@ -102,7 +104,8 @@ function addBlocks(block, layer, angle) {
 
   left.show();
   right.show();
-
+  
+  // Stop after 7 layers
   if (layer < 8) {
     addBlocks(left, layer, angle+alpha);
     addBlocks(right, layer, angle-beta);
