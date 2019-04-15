@@ -33,7 +33,7 @@ function windowResized() {
 function draw_() {
   alpha = slider.value()
   beta = PI / 2 - alpha;
-  background(color('#fdf6e3'));
+  background(color('#eee8d5'));
 
   push();
   translate(width / 2, height);
@@ -104,9 +104,9 @@ function addBlocks(block, layer, angle) {
 
   left.show();
   right.show();
-  
-  // Stop after 7 layers
-  if (layer < 8) {
+
+  // Stop after 8 layers
+  if (layer < 9) {
     addBlocks(left, layer, angle+alpha);
     addBlocks(right, layer, angle-beta);
   }
