@@ -1,8 +1,4 @@
 # Garden
-Treeeees
-![Tree](./pytree.svg)
-=======
-# Garden
 A to be collection of trees.
 List of possible interesting trees to plant:
 * Data visualization trees
