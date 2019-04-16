@@ -31,6 +31,7 @@ main {
 	width: 100%;
 }
 
+/*Adapted from https://codepen.io/gillescastel/pen/qRxZQa*/
 nav {
   max-width: 800px;
   margin: auto;
@@ -75,6 +76,11 @@ nav a:hover::after{
 .sketch {
 	width: 90%;
 	margin: 0 auto;
+}
+
+#sketch-holder {
+  width: 400px;
+  height: 800px;
 }
 
 #alpha {

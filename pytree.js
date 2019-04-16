@@ -2,13 +2,15 @@ let alpha, beta;
 let baseSize; 		// Size of the root square
 
 function setup() {
-  if (windowWidth<640){
-    baseSize=0.09*windowWidth;  // Big canvas if small screen
+  if (windowWidth<640 || windowWidth<windowHeight){
+    baseSize=(0.9/11)*windowWidth;  // 90% of width if small screen
+    select('.sketch').style("width", "90%");
   }
   else{
-    baseSize=0.06*windowWidth;
+    baseSize=(0.6/11)*windowWidth;  // 60% of width if big screen
+    select('.sketch').style("width", "60%");
   }
-  canvas = createCanvas(10*baseSize, 5*baseSize);
+  canvas = createCanvas(11*baseSize, 5*baseSize);
   // Move the canvas so it’s inside our <div id="sketch-holder">.
   canvas.parent('sketch-holder');
   slider = select('#alpha');
@@ -18,13 +20,15 @@ function setup() {
 
 function windowResized() {
   // Resize canvas if window is resized
-  if (windowWidth<640){
-    baseSize=0.09*windowWidth;
+  if (windowWidth<640 || windowWidth<windowHeight){
+    baseSize=(0.9/11)*windowWidth;
+    select('.sketch').style("width", "90%");
   }
   else{
-    baseSize=0.06*windowWidth;
+    baseSize=(0.6/11)*windowWidth;
+    select('.sketch').style("width", "60%");
   }
-  resizeCanvas(10*baseSize, 5*baseSize);
+  resizeCanvas(11*baseSize, 5*baseSize);
   // Move the canvas so it’s inside our <div id="sketch-holder">.
   canvas.parent('sketch-holder');
   draw_();
