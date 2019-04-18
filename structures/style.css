@@ -1,3 +1,8 @@
+svg g {
+  text-align: middle;
+  alignment-baseline: central; 
+}
+
 header h1 {
 	font-family: 'Great Vibes', cursive;
 	font-weight: normal;
@@ -68,19 +73,14 @@ nav a:hover::after{
 }
 
 #sketch-holder {
-	/*width: 60%;
-	height: 625px;*/
+	width: 100%;
+	height: 700px;
 
 }
 
 .sketch {
 	width: 90%;
 	margin: 0 auto;
-}
-
-#sketch-holder {
-  width: 400px;
-  height: 800px;
 }
 
 #alpha {
