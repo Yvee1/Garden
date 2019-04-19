@@ -46,6 +46,15 @@ class Tree {
     }
     this.nodes.push(node);
   }
+  
+  delete(node) {
+    T.nodes.splice(T.nodes.indexOf(node), 1);
+    T.links.splice(T.links.findIndex(obj => obj.source === node || obj.target === node), 1);
+    let loc = T.links.findIndex(obj => obj.source === node || obj.target === node);
+    if (loc != -1) {
+    T.links.splice(loc, 1);
+    }
+  }
 }
 
 let svg = d3.select("svg");
@@ -119,7 +128,7 @@ function restart() {
   node.exit().remove();
   node = node.enter().append("g")
     .attr("transform", function(d) {return "translate("+d.x+", "+d.y+")";}).merge(node);
-    
+  node.on("click", function() {bad_node = d3.select(this)._groups[0][0].__data__; console.log(bad_node); T.delete(bad_node); console.log(T.nodes); restart();});   
   node.append('circle').attr("r", 20).style("fill","white"); //.text(function(node) {return node.key;});
   node.append("text").attr("text-anchor", "middle")
    .attr("alignment-baseline", "central").attr("color", "black")
