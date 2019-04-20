@@ -67,6 +67,7 @@ nav a:hover::after{
 }
 
 #sketch-holder {
+  margin-top: 50px;
 	/*width: 60%;
 	height: 625px;*/
 

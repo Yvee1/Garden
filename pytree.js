@@ -11,7 +11,6 @@ function setup() {
     select('.sketch').style("width", "60%");
   }
   canvas = createCanvas(11*baseSize, 5*baseSize);
-  console.log(11*baseSize, 5*baseSize);
   // Move the canvas so it’s inside our <div id="sketch-holder">.
   canvas.parent('sketch-holder');
   slider = select('#alpha');
