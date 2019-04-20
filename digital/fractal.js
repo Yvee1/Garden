@@ -1,7 +1,7 @@
 // Inspired by Daniel Shiffman @ Coding Train: https://www.youtube.com/watch?v=0jjeOYMjmDU 
 
-let angle = 0;
-let previousAngle = 0;
+let angle;
+let previousAngle;
 
 function setup() {
   if (windowWidth<640 || windowWidth<windowHeight){
@@ -32,8 +32,10 @@ function setup() {
   translate(width/2, height);
   scale(1, -1);
   background(color('#eee8d5'));
-  angle = 0.33;
+  angle = 0.67;
   branch(height/3);
+  angle = 3*PI/4;
+  previousAngle = angle;
 }
 
 function windowResized() {
