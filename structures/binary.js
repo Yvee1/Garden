@@ -39,6 +39,14 @@ class Node {
     }
     return y;
   }
+  //unused
+  copy() {
+    let clone = new Node(this.key);
+    clone.left = this.left;
+    clone.right = this.right;
+    clone.parent = this.parent;
+    return clone;
+  }
 }
 
 class Tree {
@@ -84,35 +92,33 @@ class Tree {
   delete(node) {
     // Backend TODO duplicates
     // Root?
-    console.log(node)
     if (node === this.root && !node.left && !node.right){
       this.root = null;
-      console.log("1a");
     }
-    // No children? Very easy
+    // No children? 
     else if (!node.left && !node.right) {
       node.parent.left === node ? node.parent.left = null : node.parent.right = null;
-      console.log("1b");
     }
     else {
-      // One child? Easy
+      // One child? 
       if (node.left && !node.right){
         if (!node.parent){
           let temp = node.left;
           this.delete(temp);
           this.root.key = temp.key;
-          console.log("2a");
           return;
         }
         else if (node.parent.left === node){
           node.parent.left = node.left;
+          node.left.x = node.x;
+          node.left.y = node.y;
           this.links.push({source: node.parent, target: node.left});
-          console.log("2b");
         }
         else {
           node.parent.right = node.left;
-          this.links.push({source: node.parent, target: node.right});
-          console.log("2c")
+          node.left.x = node.x;
+          node.left.y = node.y;
+          this.links.push({source: node.parent, target: node.left});
         }
         node.left.parent = node.parent;
       }
@@ -121,25 +127,25 @@ class Tree {
           let temp = node.right;
           this.delete(temp);
           this.root.key = temp.key;
-          console.log("3a")
           return;
         }
         else if (node.parent.left === node){
           node.parent.left = node.right;
-          this.links.push({source: node.parent, target: node.left});
-          console.log("3b")
+          node.right.x = node.x;
+          node.right.y = node.y;
+          this.links.push({source: node.parent, target: node.right});
         }
         else {
           node.parent.right = node.right;
+          node.right.x = node.x;
+          node.right.y = node.y;
           this.links.push({source: node.parent, target: node.right});
-          console.log("3c");
         }
         node.right.parent = node.parent;
       }
 
-      // Two children? Medium
+      // Two children?
       else {
-        console.log("4");
         let succ = node.successor();
         this.delete(succ);
         node.key = succ.key;
@@ -148,10 +154,13 @@ class Tree {
     }
     // Frontend
     T.nodes.splice(T.nodes.indexOf(node), 1);
-    T.links.splice(T.links.findIndex(obj => obj.source === node || obj.target === node), 1);
     let loc = T.links.findIndex(obj => obj.source === node || obj.target === node);
     if (loc != -1) {
-    T.links.splice(loc, 1);
+      T.links.splice(loc, 1);
+    }
+    loc = T.links.findIndex(obj => obj.source === node || obj.target === node);
+    if (loc != -1) {
+      T.links.splice(loc, 1);
     }
   }
 }
@@ -164,18 +173,18 @@ var curvy = d3.linkHorizontal()
    .y(function(d) { return d.y; });
 
 // default tree
-root = new Node(4);
+root = new Node(5);
 T = new Tree(width/2, 75);
 T.insert(root);
-T.insert(new Node(1));
-T.insert(new Node(2));
 T.insert(new Node(3));
+T.insert(new Node(8));
+T.insert(new Node(4));
+T.insert(new Node(2));
 
 // event listener on number input
 d3.select("#insert-key").on("click", function() {
   let node = new Node(parseInt(d3.select("#key")._groups[0][0].value));
   T.insert(node);
-  console.log(T);
   restart();
   //  drawSubtree(T.root, 200, 35);
 });
@@ -230,7 +239,7 @@ function restart() {
   node.exit().remove();
   node = node.enter().append("g")
     .attr("transform", function(d) {return "translate("+d.x+", "+d.y+")";}).merge(node);
-  node.on("click", function() {bad_node = d3.select(this)._groups[0][0].__data__; console.log(T); T.delete(bad_node); console.log(T); restart();});   
+  node.on("click", function() {bad_node = d3.select(this)._groups[0][0].__data__; T.delete(bad_node); restart();});   
   node.append('circle').attr("r", 20).style("fill","white"); //.text(function(node) {return node.key;});
   node.append("text").attr("text-anchor", "middle")
    .attr("alignment-baseline", "central").attr("color", "black")
