@@ -2,11 +2,11 @@
 A to be collection of trees.
 List of possible interesting trees to plant:
 * Data visualization trees
-  * ~~Traditional Pythagoras tree~~
+  * ~~Traditional Pythagoras tree~~  p5.js
   * Generalized Pythagoras tree
 * Data structures
   * Binary trees
-    * Traditional binary tree
+    * ~~Traditional binary tree~~    d3.js TODO: better layout + stability
     * Red-black tree
       * Traditional
       * Augmented
