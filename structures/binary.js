@@ -240,8 +240,13 @@ function restart() {
     .merge(node);
 
   // add click event handlers for new nodes: delete the node
-  node.on("click", function(d) {
-        let succ = d.successor();
+  node.on("click", handleDeletion)
+      .on("touchend", handleDeletion);
+    
+  function handleDeletion(d) {
+    d3.event.stopPropagation();
+    d3.event.preventDefault();
+    let succ = d.successor();
     d3.select(this).classed("highlighted", false);
     if (succ) {
       node.filter((d, i) => i === succ.index)
@@ -249,18 +254,19 @@ function restart() {
     }
     T.delete(d);
     restart();
-
-  });   
+  };   
 
   // add hover event handlers: hightlight current and successor
-  node.on("mouseover", function(d) {
+  node.on("mouseover", startHighlight)
+      .on("touchstart", startHighlight);
+  function startHighlight(d) {
     let succ = d.successor();
     d3.select(this).classed("highlighted", true);
     if (succ) {
       node.filter((d, i) => i === succ.index)
         .classed("successor", true);
     }
-  });
+  };
   node.on("mouseout", function(d) {
     let succ = d.successor();
     d3.select(this).classed("highlighted", false);
