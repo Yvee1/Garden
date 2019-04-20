@@ -182,68 +182,101 @@ T.insert(new Node(4));
 T.insert(new Node(2));
 
 // event listener on number input
-d3.select("#insert-key").on("click", function() {
+d3.select("#insert-key")
+  .on("click", handleInsertion)
+d3.select("#key")
+  .on("keyup", function() {
+    console.log("PRESSED");
+    if(d3.event.keyCode === 13) {
+      event.preventDefault();
+      handleInsertion();
+    }
+  });
+
+function handleInsertion() {
   let node = new Node(parseInt(d3.select("#key")._groups[0][0].value));
   T.insert(node);
   restart();
-  //  drawSubtree(T.root, 200, 35);
-});
-// drawSubtree(T.root, 200, 35);
+};
 
-function drawSubtree(node, x, y){
-  if (node === null) {
-    return
-  }
-    if (node.left !== null){
-  g.append("path").attr("d", curvy({"source" : [x, y], "target" : [x-50, y+50]}))
-   .style("fill", "none")
-   .style("stroke", "darkslateblue")
-   .style("stroke-width", "4px");
-  drawSubtree(node.left, x-50, y+50);
-  } if (node.right !== null){
-    g.append("path").attr("d", curvy({"source" : [x, y], "target" : [x+50, y+50]}))
-     .style("fill", "none")
-     .style("stroke", "darkslateblue")
-     .style("stroke-width", "4px");
-     drawSubtree(node.right, x+50, y+50);
-  }
-  g.append("circle").attr("cx", x)
-   .attr("cy", y).attr("r", 20).style("fill", "white");
-  g.append("text").attr("x", x).attr("y", y)
-   .attr("text-anchor", "middle")
-   .attr("alignment-baseline", "central")
-   .text(node.key);
-
-}
-
-let link = g.append("g").attr("stroke", "#000").attr("stroke-width", 1.5).selectAll(".link");
-let node = g.append("g").attr("stroke-width", 1.5).selectAll("g");
-let simulation = d3.forceSimulation(T.nodes).force('charge', d3.forceManyBody().strength(-10)).force('link', d3.forceLink().links(T.links).distance(100)).on('tick', ticked);
+// make groups of for links and nodes
+let link = g.append("g")
+  .attr("stroke", "#000")
+  .attr("stroke-width", 1.5)
+  .selectAll(".link");
+let node = g.append("g")
+  .attr("stroke-width", 1.5)
+  .selectAll("g");
+// make a force simulation
+let simulation = d3.forceSimulation(T.nodes)
+  .force('charge', d3.forceManyBody().strength(-10))
+  .force('link', d3.forceLink().links(T.links).distance(100))
+  .on('tick', ticked);
+// start the simulation
 restart();
+
 function ticked() {
-  node.attr("transform", function(d) {return "translate("+d.x+", "+d.y+")";})
-  link.attr("d", function(d) {return curvy(d);});
+  // gets called every tick of the simulation, update locations
+  node.attr("transform", d => "translate("+d.x+", "+d.y+")");
+  link.attr("d", d => curvy(d));
  }
 function restart() {
+  // check for new links and add/remove them accordingly
   link = link.data(T.links);
   link.exit().remove();
   link = link.enter().append("path")
-    .attr("d", function(d) {return curvy(d);})
+    .attr("d", d => curvy(d))
     .style("fill", "none")
     .style("stroke", "darkslateblue")
     .style("stroke-width", "4px")
     .merge(link);
 
 
+  // check for new nodes and add/remove them accordingly
   node = node.data(T.nodes);
   node.exit().remove();
   node = node.enter().append("g")
-    .attr("transform", function(d) {return "translate("+d.x+", "+d.y+")";}).merge(node);
-  node.on("click", function() {bad_node = d3.select(this)._groups[0][0].__data__; T.delete(bad_node); restart();});   
-  node.append('circle').attr("r", 20).style("fill","white"); //.text(function(node) {return node.key;});
-  node.append("text").attr("text-anchor", "middle")
-   .attr("alignment-baseline", "central").attr("color", "black")
-   .text(function(d){return d.key;});
+    .attr("transform", d => "translate("+d.x+", "+d.y+")")
+    .merge(node);
+
+  // add click event handlers for new nodes: delete the node
+  node.on("click", function(d) {
+        let succ = d.successor();
+    d3.select(this).classed("highlighted", false);
+    if (succ) {
+      node.filter((d, i) => i === succ.index)
+        .classed("successor", false);
+    }
+    T.delete(d);
+    restart();
+
+  });   
+
+  // add hover event handlers: hightlight current and successor
+  node.on("mouseover", function(d) {
+    let succ = d.successor();
+    d3.select(this).classed("highlighted", true);
+    if (succ) {
+      node.filter((d, i) => i === succ.index)
+        .classed("successor", true);
+    }
+  });
+  node.on("mouseout", function(d) {
+    let succ = d.successor();
+    d3.select(this).classed("highlighted", false);
+    if (succ) {
+      node.filter((d, i) => i === succ.index)
+        .classed("successor", false);
+    }
+  });
+
+  // add circle for each new node with text for the key
+  node.append('circle')
+    .attr("r", 20);
+  node.append("text")
+    .attr("text-anchor", "middle")
+    .attr("alignment-baseline", "central")
+    .text(function(d){return d.key;});
 
   simulation.nodes(T.nodes);
   simulation.alpha(1).restart();

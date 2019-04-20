@@ -3,6 +3,29 @@ svg g {
   alignment-baseline: central; 
 }
 
+circle {
+  stroke: white;
+  fill: white;
+}
+
+text {
+  fill: black;
+  cursor: default;
+}
+
+.highlighted circle {
+  stroke: red;
+  fill: red;
+}
+
+.highlighted text {
+  fill: white;
+}
+
+.successor circle {
+  stroke: yellow;
+}
+
 header h1 {
 	font-family: 'Great Vibes', cursive;
 	font-weight: normal;
