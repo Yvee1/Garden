@@ -20,7 +20,7 @@ List of possible interesting trees to plant:
   * Prim's algorithm
   * Kruskal's algorithm
 * Digital trees
-  * Fractal tree
+  * ~~Fractal tree~~ p5.js
   * Space colonization tree
   * L-system tree
   
