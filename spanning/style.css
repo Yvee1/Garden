@@ -66,11 +66,15 @@ nav a:hover::after{
   transform: scaleX(1)
 }
 
-#sketch-holder {
-	/*width: 60%;
-	height: 625px;*/
-
+#graph-container {
+  width: 500px;
+  height: 500px;
+  margin:auto;
+  outline: 2px solid #002b36;
+  margin-top: 20px; 
+  margin-bottom: 20px; 
 }
+
 
 .sketch {
 	width: 90%;

@@ -62,6 +62,7 @@ function windowResized() {
   resizeCanvas(11*baseSize, 9*baseSize);
   // Move the canvas so it’s inside our <div id="sketch-holder">.
   canvas.parent('sketch-holder');
+  branch(height/3);
 }
 
 function draw(){
