@@ -19,8 +19,8 @@ text {
 }
 
 .highlighted circle {
-  stroke: red;
-  fill: red;
+  stroke: #dc322f;
+  fill: #dc322f;
 }
 
 .highlighted text {
@@ -28,7 +28,8 @@ text {
 }
 
 .successor circle {
-  stroke: yellow;
+  stroke: #6c71c4;
+  stroke-width: 3px;
 }
 
 header h1 {
