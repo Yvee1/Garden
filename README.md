@@ -17,7 +17,7 @@ List of possible interesting trees to plant:
   * Heap
   * Trie
 * Minimum spanning trees
-  * Prim's algorithm
+  * ~~Prim's algorithm~~ sigma.js TODO: step-by-step visualisation
   * Kruskal's algorithm
 * Digital trees
   * ~~Fractal tree~~ p5.js
