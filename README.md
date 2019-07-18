@@ -1,4 +1,6 @@
 # Garden
+This repository has perished but a [park](https://github.com/Yvee1/Park) has risen up from its ashes.
+
 A to be collection of trees.
 List of possible interesting trees to plant:
 * Data visualization trees
